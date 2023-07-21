@@ -278,9 +278,10 @@ Where:
 -  From (string) - is the ID of the client that is sending the message.
 -  MessageText (string) -  is the message being sent. 
 
-- There should be **NO** spaces before or after the first 3 commas of the ‘send’ request.
-- The word 'send' must be in lower case.
-- Remember that the To and From strings are case-sensitive.
+There should be **NO** spaces before or after the first 3 commas of the ‘send’ request.
+  
+The word 'send' must be in lower case.
+Remember that the To and From strings are case-sensitive.
 
 If your client does not have a client ID, you can uses 'noReply' in it's place. This tells the system that any replies to this message will simply fall into the big black-hole of 'Expired Messages'. This is useful for IoT devices that only send something, like soil-temperature to the 'public' channel,  and don't expect any replies.
 
@@ -362,6 +363,7 @@ If a client sends an ‘helo’ request to the Host program, the string "Queue M
 The word 'helo' must be in lower case, and must NOT have any spaces after it.
 
 So, why ‘helo’ and not ‘hello’?
+
 Will, I lifted this ideal from the SMTP ( Simple Mail Transfer Protocol ) protocol. And in SMTP, the request is ‘helo’. I just felt that it wasn't worth the time and confusion to change it.
 
 ---

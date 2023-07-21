@@ -25,11 +25,11 @@ Step 1:
 Download the files. See the next section for instructions.
 
 Step 2:
-You will need to start the C++ program called '**tmqm**'. 
-This is the Host program that the Clients communicate with.
-There is a compiled executable for Ubuntu that comes with this documentation.
-To run it:    ./tmqm
-For Windows, you will need to compile tmqm.c (see how bellow).
+1. You will need to start the C++ program called '**tmqm**'. 
+2. This is the Host program that the Clients communicate with.
+3. There is a compiled executable for Ubuntu that comes with this documentation.
+4. To run it:    ./tmqm
+5. For Windows, you will need to compile tmqm.c (see how bellow).
 
 Step 3:
 Next, you should run **startup.py**. This will scan your network for tmqm and record it's IP address to a local text file.
@@ -47,7 +47,9 @@ Thanks, Joe.
 
 Option 1:
 You can get everything you need by downloading this file, and unzipping it into a folder. This URL should be all lower-case.
+```
 https://www.gsw7.net/files/tmqm.zip
+```
 
 Option 2:
 There is also a GITHUB repository. The command to clone the repository is:

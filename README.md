@@ -53,8 +53,9 @@ https://www.gsw7.net/files/tmqm.zip
 
 Option 2:
 There is also a GITHUB repository. The command to clone the repository is:
-
-
+```
+git clone https://github.com/JayNetor/TMQM.git
+```
 
 
 ## Installing:

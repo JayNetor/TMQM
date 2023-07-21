@@ -6,7 +6,7 @@ Version 4.0.0
 Written by Joe Roten, 2023/07/12
 
 
-## What is The _Tinny Message Queue Manager:
+## What is The Tinny Message Queue Manager:
   
 The _Tinny Message Queue Manager_ (TMQM) allows programs, called the **Clients**, to ‘broadcast’ text message to other Clients on the network. This allows clients to share messages and data, across multiple computers, and multiple programming languages. 
 

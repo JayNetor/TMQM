@@ -269,22 +269,24 @@ A **client** can broadcast a text message to the other clients, by issuing a ‘
 This request is a string of characters, sent by a socket connection, to the Host.
 
 The low-level syntax of the ‘send’ request is:
-     send,_To_,_From_,_MessageText_
+```
+     send,To,From,MessageText
+```
 
 Where:
-  To (string) - is a client ID or channel to whom the message is intended.
-  From (string) - is the ID of the client that is sending the message.
-  MessageText (string) -  is the message being sent. 
+-  To (string) - is a client ID or channel to whom the message is intended.
+-  From (string) - is the ID of the client that is sending the message.
+-  MessageText (string) -  is the message being sent. 
 
-There should be **NO** spaces before or after the first 3 commas of the ‘send’ request.
-The word 'send' must be in lower case.
-Remember that the To and From strings are case-sensitive.
+- There should be **NO** spaces before or after the first 3 commas of the ‘send’ request.
+- The word 'send' must be in lower case.
+- Remember that the To and From strings are case-sensitive.
 
 If your client does not have a client ID, you can uses 'noReply' in it's place. This tells the system that any replies to this message will simply fall into the big black-hole of 'Expired Messages'. This is useful for IoT devices that only send something, like soil-temperature to the 'public' channel,  and don't expect any replies.
 
 ### In the example1.py script, the send() function is just a wrapper for the 'send' request.
 
-IMPORTANT:
+### IMPORTANT:
 Messages will expire ( be deleted ) from the **Message Queue** after 10 minutes of having been sent. This is to ensure that there is always plenty of free memory for new messages.
 
 
@@ -299,30 +301,37 @@ This request is a string of characters, sent by a socket connection, to the Host
 Text messages are received in the order that they were sent.  That's to say, the Message Queue is a FiFo queue ( the First message In will be the First message Out ). 
 
 The low-level syntax of the ‘recv’ request is:
+```
   recv,Index
+```
 
 Where:
-  Index (string) - Is a index number of a message in the queue. 
+-  Index (string) - Is a index number of a message in the queue. 
 
 There should be NO spaces before or after the comma.
+
 The world 'recv' must be in lower-case.
 
 
 The ‘recv’ request will return a comma delimited string of 4 parts:
+```
   NewIndex,To,From,MessageText
+```
 
 Where:
-  NewIndex (string) - is the queue index number of the message.
-  To (string) - is a client ID or channel to whom the message is intended.
-  From (string) - is the ID of the client that is sending the message.
-  MessageText (string) -  is the message being sent. 
+-  NewIndex (string) - is the queue index number of the message.
+-  To (string) - is a client ID or channel to whom the message is intended.
+-  From (string) - is the ID of the client that is sending the message.
+-  MessageText (string) -  is the message being sent. 
 
 Each message in the Message Queue has a unique Index number. The ‘recv’ request will return the <u>next message in the queue who’s Index is greater than the Index given in the request</u>.
- 
+
+``` 
 Example:
   request:    recv,14
 May return the string:
   15,public,46,This is a test message.
+```
 
 In this example, we passed the Index of 14 in the request, and a value of 15, which is the Index of the next message in the queue who’s Index is greater than 14, was returned. This value of 15 should be what we uses to request the next message after this one.  
 
@@ -334,14 +343,14 @@ So, ‘recv,15’ will return the message who’s Index is 18, which is now the 
 See how that works :)
 
 
-Reaching the bottom of the queue:
+### Reaching the bottom of the queue:
 
 Lets say that we have reached the bottom of the queue. That’s to say, we send the request ‘recv,40’ but there are no messages in the queue who have an Index greater than 40. In this case, the comma delimited string that will be returned is ‘**40,None,None,None**’. Note that the returned Index is 40, not 41. So, 40 is the Index we should uses the next time we issue an ‘recv’ request.
 
 The next message that will be added to the queue will have an Index of 41, and therefore, the request ‘recv,40’ will return that new message.
 
 
-Confused ??
+### Confused ??
 Will, I would suggest not spending a lot of time on this. All of this explanation is really just for documentation sake. I recommend that you just copy/past my example code into your projects and run with that. Life’s too short to let yourself get lost in the weeds.
 
 ---
@@ -366,7 +375,9 @@ It’s use is completely optional.
 The word 'init' must be in lower case, and must NOT have any spaces after it.
 
 If a client sends an ‘init’ request to the Host program, a 3 part comma delimited string is returned. The format of this returned string is:
+```
   clientID,bottomIndex,clientIPaddress
+```
   
 The **clientID** (string) is a string that can be used as the client’s ID. Numbers start at 0, and are incremented each time an ‘init’ request is made by any client. The client really only needs a client ID if it needs to receive a reply to a broadcast message. You could also uses the Python module uuid() to do this, but since the ID need only be unique in context of the Host, having a long 16 character string for an ID is a bit of an overkill.
 
@@ -414,7 +425,8 @@ Remember to bookmark the Converters you like.
 
 This subject is kind of 'out-of-scope' for this document. But I felt that I had to at least mention it.
 
-The answer is...YES. 
+The answer is...YES.
+
 A TMQM client can be made to work on a low-power IoT device like an Arduion, ESP32, or home-brewed circuit <u>without a WiFi connection</u> . The solution is to use low-power 433 Mhz communication devices to create a secondary 'network' . 
 
 You can use a low-power 433 Mhz transmitter, attached to the Tx pin of an ESP32, to transmit the output text to any nearby receiver.
@@ -435,8 +447,8 @@ Wait ? ...  WHAT ? ...  BASIC ???
 Why the heck would anyone want to write a client in BASIC ?
 
 This example is simply to make a point. 
-And that point is: 
-You can write a TMQM Client in <u>ANY PROGRAMMING LANGUAGE</u>. Even BASIC.
+- And that point is: 
+- You can write a TMQM Client in <u>ANY PROGRAMMING LANGUAGE</u>. Even BASIC.
 
 In the example program **example1.py**, the connection to the Host program is made over a network Socket. But what if you are writing a client in a programming language that does not support sockets? Like Fortran, Cobol, or Basic?
 
@@ -500,8 +512,8 @@ The source code for 'tmqm.cpp' and 'tmqm.c' are available from the gethub reposi
 The files are the same, only the file extensions are different.
 
 To compile the Host program from the source code, the command is:
-  Linux:   g++ tmqm.cpp -o tmqm
-  Windows:   gcc tmqm.c -o tmqm.exe
+-  Linux:   g++ tmqm.cpp -o tmqm
+-  Windows:   gcc tmqm.c -o tmqm.exe
 
 This will create an executable that you can then run on your computer.
 

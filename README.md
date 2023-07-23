@@ -8,7 +8,7 @@ Written by Joe Roten, 2023/07/12
 
 ## What is The Tinny Message Queue Manager:
   
-The _Tinny Message Queue Manager_ (TMQM) allows programs, called the **Clients**, to ‘broadcast’ text message to other Clients on the network. This allows clients to share messages and data, across multiple computers, and multiple programming languages. 
+The _Tinny Message Queue Manager_ (TMQM) allows programs, called the **Clients**, to 'broadcast' text message to other Clients on the network. This allows clients to share messages and data, across multiple computers, and multiple programming languages. 
 
 This is done with very little overhead, 
 and in a very simple way to implement.
@@ -46,7 +46,7 @@ Thanks, Joe.
 ## How to download the files.
 
 Option 1:
-You can get everything you need by downloading this file, and unzipping it into a folder. This URL should be all lower-case.
+You can get everything you need by downloading this file, and unzipping it into a folder.
 ```
 https://www.gsw7.net/files/tmqm.zip
 ```
@@ -163,7 +163,7 @@ This file (  setup.py  ) is licensed under a "Creative Commons License".  So <u>
 After you have started the Host, and run the setup.py script, 
 you can then test by running the Python script **example1.py**. 
 
-It is often said that ‘a picture is worth a thousand words’. 
+It is often said that 'a picture is worth a thousand words'. 
 Will, I believe that a few examples is worth a thousand lines of documentation.
 
 And so… I invite you to look at the file **example1.py**, **example2.py** and **example3.py**. These python scripts are very simple example of clients, showing how messages are broadcast and received. These Python scripts will run on Linux, Windows, and/or Mac.
@@ -185,13 +185,13 @@ Sample output of example2.py:
 A channel is a case-sensitive string that defines to whom the message is sent.
 Example: A message sent to the 'public' channel, is intended to be received by all clients who are a member of that channel.
 
-```Python
+```
 send( "public" , "This is a message sent to all clients in the 'public' channell." )
 ```
 
 A Client's ID is also a channel. It's just a channel which only one client is a member of.
 
-```Python
+```
 send( "147", "This is a message sent only to client 147." )
 ```
 
@@ -206,8 +206,8 @@ When I client starts, it is AUTOMATICALLY joined to the following channels:
 A **channel** is: 
 1. A group of zero or more clients. Yes, a channel can have NO clients.
 2. Channel names are case-sensitive.
-3. A new channel is created automatically when it’s used for the first time.
-4. A client’s ID is really just a channel of only one client.
+3. A new channel is created automatically when it's used for the first time.
+4. A client's ID is really just a channel of only one client.
 5. An IP address or filename can also be used as a channel.
 6. A name can also be a channel ( Jill.Smith   or   room-314 )
 
@@ -216,9 +216,9 @@ Predefined channels:
 2. **public** – Used to make public announcements.
 3. **me** - Will be replaced with the client-ID by the Python Client() class.
 4. **noReply** – No reply intended, no clients are members.
-5. **console** – Message will be displayed on the operator’s console ( if any ).
+5. **console** – Message will be displayed on the operator's console ( if any ).
 6. **logger** – Message will be recorded to a log file, assuming that a client is doing so.
-7. **None** – Reserved for message processing. See the ‘recv’ request.
+7. **None** – Reserved for message processing. See the 'recv' request.
 8. **pager** – Message to be sent to the admin's cellphone as a text message.
 
 
@@ -238,7 +238,7 @@ There should be only <u>ONE</u> instances of the Host running on the Network Seg
 
 ## How to kill the host.
 
-If for any reason you need to KILL the Host (tmqm) program on an Ubuntu computer, the command is:```
+If for any reason you need to KILL the Host (tmqm) program on an Ubuntu computer, the command is:
 ```
 pkill tmqm
 ```
@@ -263,13 +263,13 @@ This file ( pytmqm.py ) is licensed under a "Creative Commons License".  So <u>y
 
 ---
 
-## The ‘send’ request (low-level) :
+## The 'send' request (low-level) :
 
-A **client** can broadcast a text message to the other clients, by issuing a ‘send’ request to the **Host**. 
+A **client** can broadcast a text message to the other clients, by issuing a 'send' request to the **Host**. 
 
 This request is a string of characters, sent by a socket connection, to the Host.
 
-The low-level syntax of the ‘send’ request is:
+The low-level syntax of the 'send' request is:
 ```
      send,To,From,MessageText
 ```
@@ -279,7 +279,7 @@ Where:
 -  From (string) - is the ID of the client that is sending the message.
 -  MessageText (string) -  is the message being sent. 
 
-There should be **NO** spaces before or after the first 3 commas of the ‘send’ request.
+There should be **NO** spaces before or after the first 3 commas of the 'send' request.
   
 The word 'send' must be in lower case.
 Remember that the To and From strings are case-sensitive.
@@ -294,15 +294,15 @@ Messages will expire ( be deleted ) from the **Message Queue** after 10 minutes 
 
 ---
   
-## The ‘recv’ request (low-level):
+## The 'recv' request (low-level):
 
-A client can receive the next waiting message in the Message Queue by issuing a ‘recv’ request to the Host program. 
+A client can receive the next waiting message in the Message Queue by issuing a 'recv' request to the Host program. 
 
 This request is a string of characters, sent by a socket connection, to the Host. Another string of characters is received over the same socket connection, as a response to the request. 
 
 Text messages are received in the order that they were sent.  That's to say, the Message Queue is a FiFo queue ( the First message In will be the First message Out ). 
 
-The low-level syntax of the ‘recv’ request is:
+The low-level syntax of the 'recv' request is:
 ```
   recv,Index
 ```
@@ -315,7 +315,7 @@ There should be NO spaces before or after the comma.
 The world 'recv' must be in lower-case.
 
 
-The ‘recv’ request will return a comma delimited string of 4 parts:
+The 'recv' request will return a comma delimited string of 4 parts:
 ```
   NewIndex,To,From,MessageText
 ```
@@ -326,7 +326,7 @@ Where:
 -  From (string) - is the ID of the client that is sending the message.
 -  MessageText (string) -  is the message being sent. 
 
-Each message in the Message Queue has a unique Index number. The ‘recv’ request will return the <u>next message in the queue who’s Index is greater than the Index given in the request</u>.
+Each message in the Message Queue has a unique Index number. The 'recv' request will return the <u>next message in the queue who's Index is greater than the Index given in the request</u>.
 
 ``` 
 Example:
@@ -335,60 +335,60 @@ May return the string:
   15,public,46,This is a test message.
 ```
 
-In this example, we passed the Index of 14 in the request, and a value of 15, which is the Index of the next message in the queue who’s Index is greater than 14, was returned. This value of 15 should be what we uses to request the next message after this one.  
+In this example, we passed the Index of 14 in the request, and a value of 15, which is the Index of the next message in the queue who's Index is greater than 14, was returned. This value of 15 should be what we uses to request the next message after this one.  
 
 **Remember** that messages older than 10 minutes old are also expiring ( being deleted from the queue ). This can, and will, cause gaps in the Index sequence.
 
 Lets say that you retrieve message 14, but before you can retrieve the next one, messages 15,16,17 have expired.
 
-So, ‘recv,15’ will return the message who’s Index is 18, which is now the next message who’s Index is greater than 15.
+So, 'recv,15' will return the message who's Index is 18, which is now the next message who's Index is greater than 15.
 See how that works :)
 
 
 ### Reaching the bottom of the queue:
 
-Lets say that we have reached the bottom of the queue. That’s to say, we send the request ‘recv,40’ but there are no messages in the queue who have an Index greater than 40. In this case, the comma delimited string that will be returned is ‘**40,None,None,None**’. Note that the returned Index is 40, not 41. So, 40 is the Index we should uses the next time we issue an ‘recv’ request.
+Lets say that we have reached the bottom of the queue. That's to say, we send the request 'recv,40' but there are no messages in the queue who have an Index greater than 40. In this case, the comma delimited string that will be returned is '**40,None,None,None**'. Note that the returned Index is 40, not 41. So, 40 is the Index we should uses the next time we issue an 'recv' request.
 
-The next message that will be added to the queue will have an Index of 41, and therefore, the request ‘recv,40’ will return that new message.
+The next message that will be added to the queue will have an Index of 41, and therefore, the request 'recv,40' will return that new message.
 
 
 ### Confused ??
-Will, I would suggest not spending a lot of time on this. All of this explanation is really just for documentation sake. I recommend that you just copy/past my example code into your projects and run with that. Life’s too short to let yourself get lost in the weeds.
+Will, I would suggest not spending a lot of time on this. All of this explanation is really just for documentation sake. I recommend that you just copy/past my example code into your projects and run with that. Life's too short to let yourself get lost in the weeds.
 
 ---
 
-## The ‘helo’ request (low-level):
+## The 'helo' request (low-level):
 
-If a client sends an ‘helo’ request to the Host program, the string "Queue Manager Responding” will be returned. The ‘helo’ request is simply a way of testing if the Host program is responding on the IP address given. Nothing more.
+If a client sends an 'helo' request to the Host program, the string "Queue Manager Responding” will be returned. The 'helo' request is simply a way of testing if the Host program is responding on the IP address given. Nothing more.
 
 The word 'helo' must be in lower case, and must NOT have any spaces after it.
 
-So, why ‘helo’ and not ‘hello’?
+So, why 'helo' and not 'hello'?
 
-Will, I lifted this ideal from the SMTP ( Simple Mail Transfer Protocol ) protocol. And in SMTP, the request is ‘helo’. I just felt that it wasn't worth the time and confusion to change it.
+Will, I lifted this ideal from the SMTP ( Simple Mail Transfer Protocol ) protocol. And in SMTP, the request is 'helo'. I just felt that it wasn't worth the time and confusion to change it.
 
 ---
 
-## The ‘init’ request (low-level):
+## The 'init' request (low-level):
 
-The ‘init’ request is used to retrieve some basic info about the client from the Host program. It is usually preformed on startup of the client. This request only returns information, and does not actually initialize any kind of client slot on the Host. 
+The 'init' request is used to retrieve some basic info about the client from the Host program. It is usually preformed on startup of the client. This request only returns information, and does not actually initialize any kind of client slot on the Host. 
 
-It’s use is completely optional.  
+It's use is completely optional.  
 
 The word 'init' must be in lower case, and must NOT have any spaces after it.
 
-If a client sends an ‘init’ request to the Host program, a 3 part comma delimited string is returned. The format of this returned string is:
+If a client sends an 'init' request to the Host program, a 3 part comma delimited string is returned. The format of this returned string is:
 ```
   clientID,bottomIndex,clientIPaddress
 ```
   
-The **clientID** (string) is a string that can be used as the client’s ID. Numbers start at 0, and are incremented each time an ‘init’ request is made by any client. The client really only needs a client ID if it needs to receive a reply to a broadcast message. You could also uses the Python module uuid() to do this, but since the ID need only be unique in context of the Host, having a long 16 character string for an ID is a bit of an overkill.
+The **clientID** (string) is a string that can be used as the client's ID. Numbers start at 0, and are incremented each time an 'init' request is made by any client. The client really only needs a client ID if it needs to receive a reply to a broadcast message. You could also uses the Python module uuid() to do this, but since the ID need only be unique in context of the Host, having a long 16 character string for an ID is a bit of an overkill.
 
 If a Client has no need of receiving any replies to it's messages, like an IoT temperature monitor, then the string 'noReply' can be used in place of the Client's ID.
 
-The **bottomIndex** (string) is the Index of the last (bottom) message in the Message Queue. This is the value that can be used for your first ‘recv’ request. However, the client could simply start with an Index of zero, in which case it may received messages that were broadcasts 10 minutes before it started. But if that’s not an issue, starting at zero is OK.
+The **bottomIndex** (string) is the Index of the last (bottom) message in the Message Queue. This is the value that can be used for your first 'recv' request. However, the client could simply start with an Index of zero, in which case it may received messages that were broadcasts 10 minutes before it started. But if that's not an issue, starting at zero is OK.
 
-The **clientIPaddress** (string) is the IP address of the client as seen by the Host. It just easier to get this value from the Host program rather than trying to get it from a DNS server. This value should be included in the reply to any ‘+ping’ requests. It can also be used as a channel for the ‘send’ request; like broadcast a message to all clients on ‘192.168.0.35’ for example.
+The **clientIPaddress** (string) is the IP address of the client as seen by the Host. It just easier to get this value from the Host program rather than trying to get it from a DNS server. This value should be included in the reply to any '+ping' requests. It can also be used as a channel for the 'send' request; like broadcast a message to all clients on '192.168.0.35' for example.
 
 
 ---
@@ -397,7 +397,7 @@ The **clientIPaddress** (string) is the IP address of the client as seen by the 
 
 If your a C++ programmer, I invite you to look at the file **example4.cpp** at this time. 
 
-This C++ source code is a very simple example of a client, showing how messages are broadcast and received. It is basically the same as **example3.py**, except it’s written in C++ instead of Python.
+This C++ source code is a very simple example of a client, showing how messages are broadcast and received. It is basically the same as **example3.py**, except it's written in C++ instead of Python.
 
 Please feel free to copy/past this code as a starting point for creating your own clients.
 
@@ -457,7 +457,7 @@ In the example program **example1.py**, the connection to the Host program is ma
 
 In this case, we could use a utility called **NETCAT**. 
 
-Netcat is a networking utility program available for Linux, Windows and Mac. It is used primarily by network administrators for troubleshooting and firewall work. But it can also be used as a ‘backdoor’ to communicate with the Host program.
+Netcat is a networking utility program available for Linux, Windows and Mac. It is used primarily by network administrators for troubleshooting and firewall work. But it can also be used as a 'backdoor' to communicate with the Host program.
 
 To install Netcat on your computer, simply do an Internet search for “**How to install Netcat**”, and follow the instructions.
 
@@ -482,7 +482,7 @@ echo "recv,126" | netcat 192.168.0.128 65432
 OK, So how can Netcat be used by a client? 
 
 Consider the following bit of BASIC. This is using the yaBasic interpreter.
-```basic
+```
 hostIP$ = "192.168.0.128"
 #
 print query$( "helo", hostIP$ )
@@ -498,7 +498,7 @@ end sub
 ```
   
 The results are:
-```md
+```
 Queue Manager Responding.
 14,13,192.168.0.128
 OK
@@ -532,7 +532,7 @@ See the accompanying file **license.md** for details.
 
 ## As always
 
-The information presented here is **FREE**.  
+The information presented here is **FREE**.
 
 But donations to help pay for Coffee, Beer, and Rent are always welcomed.
 
@@ -544,4 +544,3 @@ Thanks.
 ---
 
 # End of Documentation
-

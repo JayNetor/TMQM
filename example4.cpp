@@ -7,7 +7,7 @@
 // through a Python to c++ converter.
 //
 // For documentation see:
-//   https://www.gsw7.net/files/tmqm/readme.md
+//   https://www.gsw7.net/files/tmqm/README.html
 //
 
 

@@ -37,7 +37,7 @@
 // few simple rules. See license above for details. 
 // 
 // For documentation see:
-//   https://www.gsw7.net/files/tmqm/readme.md 
+//   https://www.gsw7.net/files/tmqm/README.html
 // 
 // To compile the program from source code: 
 //    Linux:      g++ tmqm.cpp -o tmqm

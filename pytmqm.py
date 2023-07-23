@@ -19,7 +19,7 @@ You are free to use this file in your own projects as long as you follow a
 few simple rules. See license above for details. 
 
 For documentation see:
-https://www.gsw7.net/files/tmqm/readme.md   
+https://www.gsw7.net/files/tmqm/README.html
 
 """
 

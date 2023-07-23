@@ -1,0 +1,542 @@
+
+<!DOCTYPE html>
+<html> <head> </head>
+<style>
+p { max-width: 800px;  margin-left: 20px; }
+pre { max-width: 800px;  margin-left: 30px; }
+il { max-width: 800px;  margin-left: 2px; }
+ul { max-width: 800px; }
+</style>
+<body> <p>
+</p><h1>TMQM</h1><p>
+<br>
+<br>
+</p><h1>The Tinny Message Queue Manager</h1><p>
+Version 4.0.0<br>
+Written by Joe Roten, 2023/07/12<br>
+<br>
+<br>
+</p><h2>What is The Tinny Message Queue Manager:</h2><p>
+<br>
+The<i>Tinny Message Queue Manager</i>(TMQM) allows programs, called the <b>Clients</b>, to &lsquo;broadcast&lsquo; text message to other Clients on the network. This allows clients to share messages and data, across multiple computers, and multiple programming languages.<br>
+<br>
+This is done with very little overhead,<br>
+and in a very simple way to implement.<br>
+<br>
+This differs from the traditional &nbsp;&nbsp; <b>client/server</b> &nbsp;&nbsp; model in that any client can broadcast a text message to a group ( called a channel ). A channel may consist of just one other client, or a group of clients, or <b>ALL</b> the clients on the network. Any client may be a member of many different channels. This is why I chose to use the word &lsquo;broadcast&lsquo; rather than &lsquo;send&lsquo;.<br>
+<br>
+</p><hr><p>
+</p><h1>STOP - This is the section your looking for !</h1><p>
+<br>
+If you are just looking for code to copy/past, or looking to get started quickly, then <b>THIS</b> is the section your looking for.<br>
+<br>
+Step 1:<br>
+Download the files. See the next section for instructions.<br>
+<br>
+Step 2:<ul>
+<il>1. You will need to start the C++ program called &lsquo;<b>tmqm</b>&lsquo;.</il><br>
+<il>2. This is the Host program that the Clients communicate with.</il><br>
+<il>3. There is a compiled executable for Ubuntu that comes with this documentation.</il><br>
+<il>4. To run it: &nbsp;&nbsp;  &nbsp;&nbsp; ./tmqm</il><br>
+<il>5. For Windows, you will need to compile tmqm.c (see how bellow).</il><br>
+<br>
+</ul><p>
+Step 3:<br>
+Next, you should run <b>startup.py</b>. This will scan your network for tmqm and record it&lsquo;s IP address to a local text file.<br>
+<br>
+Step 4:<br>
+Finally, you can copy/past code from <b>example1.py</b>, <b>example2.py</b> &nbsp;&nbsp; or <b>example3.py</b> to create your own Client program.<br>
+<br>
+Read the rest of this documentation if you have questions.<br>
+<br>
+Thanks, Joe.<br>
+<br>
+</p><hr><p>
+</p><h2>How to download the files.</h2><p>
+<br>
+Option 1:<br>
+You can get everything you need by downloading this file, and unzipping it into a folder.<br>
+</p><pre style='border-width:3px; border-style:solid; border-color:#0000FF; padding: 1em;'>
+<a href='https://www.gsw7.net/files/tmqm.zip' target='_Blank'>https://www.gsw7.net/files/tmqm.zip</a>
+</pre><p>
+<br>
+Option 2:<br>
+There is also a GITHUB repository. The command to clone the repository is:<br>
+</p><pre style='border-width:3px; border-style:solid; border-color:#0000FF; padding: 1em;'>
+git clone <a href='https://github.com/JayNetor/TMQM.git' target='_Blank'>https://github.com/JayNetor/TMQM.git</a>
+</pre><p>
+<br>
+<br>
+</p><h2>Installing:</h2><p>
+The tmqm Ubuntu package, along with the Python module pytmqm.py, &nbsp;&nbsp; <u>must be installed manually</u>.<br>
+As of this writing, there is NO PiPy ( The Python Package Index repository ) option to install.<br>
+<br>
+To install manually: see the below sections titled<ul>
+<il>1. &lsquo;<b>Starting the Host</b>&lsquo; and</il><br>
+<il>2. &lsquo;<b>Running setup.py</b>&lsquo;</il><br>
+<br>
+<br>
+</ul><p>
+</p><h2>Updates:</h2><p>
+I may, from time to time, submit an updated version of TMQM and it&lsquo;s associated files. &nbsp;&nbsp; When an update becomes available, I will upload a new zip file to the the website, and &lsquo;commit&lsquo; the updates to the GITHUB repository. So you might want to check for any updates from time to time.<br>
+<br>
+<br>
+</p><hr><p>
+</p><h2>Files included in the download:</h2><p>
+<br>
+Not listed in any particular order.<br>
+<ul>
+<il>1. pytmqm.py - A python module containing the tmqm Client class, used by example1.py and example2.py . <u>Please feel free to uses this in your own projects</u>.</il><br>
+<br>
+<il>2. example1.py - A simple client demonstrating the basics of sending ( broadcasting ) and receiving messages.</il><br>
+<br>
+<il>3. example2.py - A script demonstrating how to create a &lsquo;console&lsquo; kind of client, or a &lsquo;back-end-support&lsquo; kind of client.</il><br>
+<br>
+<il>4. example2.png - A screenshot of the output of example2.py. Intended to be part of the documentation.</il><br>
+<br>
+<il>5. example3.py - A very basic, bear-bone example of a client written in Python. This example <u>does NOT use the pytmqm.py module</u>.</il><br>
+<br>
+<il>6. example4.cpp - Same as example3.py, but written in C++ instead of Python.</il><br>
+<br>
+<il>7. setup.py - A Python script that will scan the network to locate the Host program. Once the Host is found, it&lsquo;s IP address is written to a local text file, which the clients will use to make the connection to the Host.</il><br>
+<br>
+<il>8. tmqm - The tmqm Host program, compiled to run on Ubuntu. ( Executable )</il><br>
+<br>
+<il>9. tmqm.c - Same as tmqm.cpp, just a different file extension.</il><br>
+<br>
+<il>10. tmqm.cpp - The C++ source code for the tmqm Host.</il><br>
+<br>
+<il>11. readme.md - The file you are reading right now.</il><br>
+<br>
+<il>12. licence.md - The Creative Commons license for this project.</il><br>
+<br>
+<br>
+</ul><p>
+</p><hr><p>
+</p><h2>How it all works :</h2><p>
+<br>
+The Client program(s) can broadcast ( send ) and receive text messages by sending requests to a Host program. The Host program should be running on the same network segment ( the same WiFi router ) as the Clients.<br>
+<br>
+Here I use the word &lsquo;broadcast&lsquo; because a text message sent by any client on the network, can be received by ALL the other clients on that same network.<br>
+<br>
+The Client programs can be written in different programming languages, and running on different devices.<br>
+<br>
+Each text message includes information about<ul>
+<il>1. which client sent it,</il><br>
+<il>2. to what client or group of clients the message is intended</il><br>
+<il>3. and the text of the message</il><br>
+<br>
+</ul><p>
+Limitations:<ul>
+<il>1. There is NO limit to the number of Clients on a TMQM network.</il><br>
+<il>2. The max number of messages in the Message Queue is only limited by the amount of free memory on the computer running the Host.</il><br>
+<il>3. The max length of the Text of a message is about 950 character.</il><br>
+<il>4. The max length of a channel name is about 25 characters.</il><br>
+<il>5. There is NO limit to the number of channels.</il><br>
+<il>6. There is NO limit to the number of clients that can join any channel.</il><br>
+<il>7. There is NO limit to the number of channels that any client can join.</il><br>
+<br>
+</ul><p>
+</p><hr><p>
+</p><h2>Starting the Host.</h2><p>
+<br>
+<b>Note</b>: If you are running the Host on a Raspberry Pi or other SBC ( single board computer ), be sure it has at least 4 GB of ram. The more memory, the better. The Host is small, but the Message Queue can grow to be quite large. So be sure you have enough ram for the project.<br>
+<br>
+The Host can be running on the same computer as the client(s), or it can be running on a different computer on the same WiFi router.<br>
+<br>
+There should be only ONE instances of the Host running on a network segment ( on the same WiFi router ).<br>
+<br>
+To start the Host on a Ubuntu computer, an executable called &lsquo;tmqm&lsquo; is included with this documentation. To start the Host, the command is: &nbsp;&nbsp; <b>./tmqm</b><br>
+<br>
+To start the Host on a Windows or Mac system, you will need to first compile the source code &lsquo;tmqm.c&lsquo;, and then run the resulting executable. Instructions on how to do this are included bellow.<br>
+<br>
+</p><hr><p>
+</p><h2>Running setup.py</h2><p>
+<br>
+After the Host is up and running, you will need to run <b>setup.py</b>. This will scan the devices on your network segment ( your WiFi router ), looking for the Host.<br>
+<br>
+When it finds the Host, it will record the IP address to a local text file called &lsquo;<b>TMQM-HostIP.txt</b>&lsquo;. This file will be saved into the current working directory.<br>
+<br>
+When a Client program starts, it will read the IP address from &lsquo;<b>TMQM-HostIP.txt</b>&lsquo; and ues that IP address to communicate with the Host.<br>
+<br>
+The setup.py script dosen&lsquo;t do anything other than scan for the Host, and record the IP address to this text file. Nothing more.<br>
+<br>
+If for any reason the IP address of the Host computer changes, simply run setup.py again to scan for the new IP address.<br>
+<br>
+This file ( &nbsp;&nbsp; setup.py &nbsp;&nbsp; ) is licensed under a "Creative Commons License". &nbsp;&nbsp; So <u>you are free to use this file in your own projects</u> as long as you follow a few simple rules. See the accompanying file <b>licnese.md</b> for details.<br>
+<br>
+</p><hr><p>
+</p><h2>Running example1.py, example2.py & example3.py</h2><p>
+<br>
+After you have started the Host, and run the setup.py script,<br>
+you can then test by running the Python script <b>example1.py</b>.<br>
+<br>
+It is often said that &lsquo;a picture is worth a thousand words&lsquo;.<br>
+Will, I believe that a few examples is worth a thousand lines of documentation.<br>
+<br>
+And so… I invite you to look at the file <b>example1.py</b>, <b>example2.py</b> and <b>example3.py</b>. These python scripts are very simple example of clients, showing how messages are broadcast and received. These Python scripts will run on Linux, Windows, and/or Mac.<br>
+<br>
+When you run example1.py, keep in mind that any other client running on the network can also receive the test messages being broadcast. Likewise, messages sent by any other client on the network will be received by example1.py.<br>
+<br>
+Please feel free to uses these examples as a starting point for creating your own clients.<br>
+<br>
+<br>
+Sample output of example2.py:<br>
+<br>
+<img src='example2.png' width='700'> 
+<br>
+<br>
+</p><hr><p>
+</p><h2>What is a channel ??</h2><p>
+<br>
+A channel is a case-sensitive string that defines to whom the message is sent.<br>
+Example: A message sent to the &lsquo;public&lsquo; channel, is intended to be received by all clients who are a member of that channel.<br>
+<br>
+</p><pre style='border-width:3px; border-style:solid; border-color:#0000FF; padding: 1em;'>
+send( "public" , "This is a message sent to all clients in the &lsquo;public&lsquo; channell." )
+</pre><p>
+<br>
+A Client&lsquo;s ID is also a channel. It&lsquo;s just a channel which only one client is a member of.<br>
+<br>
+</p><pre style='border-width:3px; border-style:solid; border-color:#0000FF; padding: 1em;'>
+send( "147", "This is a message sent only to client 147." )
+</pre><p>
+<br>
+<br>
+<br>
+When I client starts, it is AUTOMATICALLY joined to the following channels:<ul>
+<il>1. <b>all</b> - All clients are members of this channel.</il><br>
+<il>2. <b>public</b> – Used to make public announcements.</il><br>
+<il>3. The client&lsquo;s IP address - Used to send messages to all other clients running on the same computer.</il><br>
+<il>4. The client&lsquo;s scrip filename - Used to send messages to all the other instances of the same Python script on the network.</il><br>
+<br>
+</ul><p>
+A <b>channel</b> is:<ul>
+<il>1. A group of zero or more clients. Yes, a channel can have NO clients.</il><br>
+<il>2. Channel names are case-sensitive.</il><br>
+<il>3. A new channel is created automatically when it&lsquo;s used for the first time.</il><br>
+<il>4. A client&lsquo;s ID is really just a channel of only one client.</il><br>
+<il>5. An IP address or filename can also be used as a channel.</il><br>
+<il>6. A name can also be a channel ( Jill.Smith &nbsp;&nbsp;  or &nbsp;&nbsp;  room-314 )</il><br>
+<br>
+</ul><p>
+Predefined channels:<ul>
+<il>1. <b>all</b> - All clients are members of this channel.</il><br>
+<il>2. <b>public</b> – Used to make public announcements.</il><br>
+<il>3. <b>me</b> - Will be replaced with the client-ID by the Python Client() class.</il><br>
+<il>4. <b>noReply</b> – No reply intended, no clients are members.</il><br>
+<il>5. <b>console</b> – Message will be displayed on the operator&lsquo;s console ( if any ).</il><br>
+<il>6. <b>logger</b> – Message will be recorded to a log file, assuming that a client is doing so.</il><br>
+<il>7. <b>None</b> – Reserved for message processing. See the &lsquo;recv&lsquo; request.</il><br>
+<il>8. <b>pager</b> – Message to be sent to the admin&lsquo;s cellphone as a text message.</il><br>
+<br>
+<br>
+</ul><p>
+</p><hr><p>
+</p><h2>Error: Failed to bind to port 65432.</h2><p>
+<br>
+This error message may appear when you start the Host program (tmqm).<br>
+<br>
+This error message means that you are trying to start a <u>second instances</u> of the Host program on <u>a computer that is already running the Host</u>.<br>
+<br>
+You can only run <u>ONE</u> instances of the Host of a computer at a time.<br>
+<br>
+There should be only <u>ONE</u> instances of the Host running on the Network Segment ( on the same WiFi router ).<br>
+<br>
+</p><hr><p>
+</p><h2>How to kill the host.</h2><p>
+<br>
+If for any reason you need to KILL the Host (tmqm) program on an Ubuntu computer, the command is:<br>
+</p><pre style='border-width:3px; border-style:solid; border-color:#0000FF; padding: 1em;'>
+pkill tmqm
+</pre><p>
+It really is just that simple.<br>
+<br>
+</p><hr><p>
+</p><h2>pytmqm.py ( Python module )</h2><p>
+</p><h2>The Python Client() class</h2><p>
+<br>
+The Client() class makes writing TMQM clients a breeze. It does all the heavy lifting for you, allowing you to focus on what you are actually trying to achieve.<br>
+<br>
+The file pytmqm.py is a Python module that contains the TMQM Client() class.<br>
+<br>
+The scripts example1.py and exampe2.py make uses of this module / class. Refer to these scripts as examples of how this works.<br>
+<br>
+There is NO documentation for pytmqm.py in this readme.md file.<br>
+Why ? Because <u>the documentation is in pytmqm.py itself.</u><br>
+Just open the file with the text editor or IDE of you choice. Everything is fully documented and explained inside the file.<br>
+<br>
+This file ( pytmqm.py ) is licensed under a "Creative Commons License". &nbsp;&nbsp; So <u>you are free to use this file in your own projects</u> as long as you follow a few simple rules. See the accompanying file <b>licnese.md</b> for details.<br>
+<br>
+</p><hr><p>
+</p><h2>The 'send' request (low-level) :</h2><p>
+<br>
+A <b>client</b> can broadcast a text message to the other clients, by issuing a &lsquo;send&lsquo; request to the <b>Host</b>.<br>
+<br>
+This request is a string of characters, sent by a socket connection, to the Host.<br>
+<br>
+The low-level syntax of the &lsquo;send&lsquo; request is:<br>
+</p><pre style='border-width:3px; border-style:solid; border-color:#0000FF; padding: 1em;'>
+send,To,From,MessageText
+</pre><p>
+<br>
+Where:<br>
+- &nbsp;&nbsp; To (string) - is a client ID or channel to whom the message is intended.<br>
+- &nbsp;&nbsp; From (string) - is the ID of the client that is sending the message.<br>
+- &nbsp;&nbsp; MessageText (string) - &nbsp;&nbsp; is the message being sent.<br>
+<br>
+There should be <b>NO</b> spaces before or after the first 3 commas of the &lsquo;send&lsquo; request.<br>
+<br>
+The word &lsquo;send&lsquo; must be in lower case.<br>
+Remember that the To and From strings are case-sensitive.<br>
+<br>
+If your client does not have a client ID, you can uses &lsquo;noReply&lsquo; in it&lsquo;s place. This tells the system that any replies to this message will simply fall into the big black-hole of &lsquo;Expired Messages&lsquo;. This is useful for IoT devices that only send something, like soil-temperature to the &lsquo;public&lsquo; channel, &nbsp;&nbsp; and don&lsquo;t expect any replies.<br>
+<br>
+</p><h3>In the example1.py script, the send() function is just a wrapper for the 'send' request.</h3><p>
+<br>
+</p><h3>IMPORTANT:</h3><p>
+Messages will expire ( be deleted ) from the <b>Message Queue</b> after 10 minutes of having been sent. This is to ensure that there is always plenty of free memory for new messages.<br>
+<br>
+<br>
+</p><hr><p>
+</p><h2>The 'recv' request (low-level):</h2><p>
+<br>
+A client can receive the next waiting message in the Message Queue by issuing a &lsquo;recv&lsquo; request to the Host program.<br>
+<br>
+This request is a string of characters, sent by a socket connection, to the Host. Another string of characters is received over the same socket connection, as a response to the request.<br>
+<br>
+Text messages are received in the order that they were sent. &nbsp;&nbsp; That&lsquo;s to say, the Message Queue is a FiFo queue ( the First message In will be the First message Out ).<br>
+<br>
+The low-level syntax of the &lsquo;recv&lsquo; request is:<br>
+</p><pre style='border-width:3px; border-style:solid; border-color:#0000FF; padding: 1em;'>
+recv,Index
+</pre><p>
+<br>
+Where:<br>
+- &nbsp;&nbsp; Index (string) - Is a index number of a message in the queue.<br>
+<br>
+There should be NO spaces before or after the comma.<br>
+<br>
+The world &lsquo;recv&lsquo; must be in lower-case.<br>
+<br>
+<br>
+The &lsquo;recv&lsquo; request will return a comma delimited string of 4 parts:<br>
+</p><pre style='border-width:3px; border-style:solid; border-color:#0000FF; padding: 1em;'>
+NewIndex,To,From,MessageText
+</pre><p>
+<br>
+Where:<br>
+- &nbsp;&nbsp; NewIndex (string) - is the queue index number of the message.<br>
+- &nbsp;&nbsp; To (string) - is a client ID or channel to whom the message is intended.<br>
+- &nbsp;&nbsp; From (string) - is the ID of the client that is sending the message.<br>
+- &nbsp;&nbsp; MessageText (string) - &nbsp;&nbsp; is the message being sent.<br>
+<br>
+Each message in the Message Queue has a unique Index number. The &lsquo;recv&lsquo; request will return the <u>next message in the queue who&lsquo;s Index is greater than the Index given in the request</u>.<br>
+<br>
+</p><pre style='border-width:3px; border-style:solid; border-color:#0000FF; padding: 1em;'>
+Example:
+request: &nbsp;&nbsp;  &nbsp;&nbsp; recv,14
+May return the string:
+15,public,46,This is a test message.
+</pre><p>
+<br>
+In this example, we passed the Index of 14 in the request, and a value of 15, which is the Index of the next message in the queue who&lsquo;s Index is greater than 14, was returned. This value of 15 should be what we uses to request the next message after this one.<br>
+<br>
+<b>Remember</b> that messages older than 10 minutes old are also expiring ( being deleted from the queue ). This can, and will, cause gaps in the Index sequence.<br>
+<br>
+Lets say that you retrieve message 14, but before you can retrieve the next one, messages 15,16,17 have expired.<br>
+<br>
+So, &lsquo;recv,15&lsquo; will return the message who&lsquo;s Index is 18, which is now the next message who&lsquo;s Index is greater than 15.<br>
+See how that works :)<br>
+<br>
+<br>
+</p><h3>Reaching the bottom of the queue:</h3><p>
+<br>
+Lets say that we have reached the bottom of the queue. That&lsquo;s to say, we send the request &lsquo;recv,40&lsquo; but there are no messages in the queue who have an Index greater than 40. In this case, the comma delimited string that will be returned is &lsquo;<b>40,None,None,None</b>&lsquo;. Note that the returned Index is 40, not 41. So, 40 is the Index we should uses the next time we issue an &lsquo;recv&lsquo; request.<br>
+<br>
+The next message that will be added to the queue will have an Index of 41, and therefore, the request &lsquo;recv,40&lsquo; will return that new message.<br>
+<br>
+<br>
+</p><h3>Confused ??</h3><p>
+Will, I would suggest not spending a lot of time on this. All of this explanation is really just for documentation sake. I recommend that you just copy/past my example code into your projects and run with that. Life&lsquo;s too short to let yourself get lost in the weeds.<br>
+<br>
+</p><hr><p>
+</p><h2>The 'helo' request (low-level):</h2><p>
+<br>
+If a client sends an &lsquo;helo&lsquo; request to the Host program, the string "Queue Manager Responding” will be returned. The &lsquo;helo&lsquo; request is simply a way of testing if the Host program is responding on the IP address given. Nothing more.<br>
+<br>
+The word &lsquo;helo&lsquo; must be in lower case, and must NOT have any spaces after it.<br>
+<br>
+So, why &lsquo;helo&lsquo; and not &lsquo;hello&lsquo;?<br>
+<br>
+Will, I lifted this ideal from the SMTP ( Simple Mail Transfer Protocol ) protocol. And in SMTP, the request is &lsquo;helo&lsquo;. I just felt that it wasn&lsquo;t worth the time and confusion to change it.<br>
+<br>
+</p><hr><p>
+</p><h2>The 'init' request (low-level):</h2><p>
+<br>
+The &lsquo;init&lsquo; request is used to retrieve some basic info about the client from the Host program. It is usually preformed on startup of the client. This request only returns information, and does not actually initialize any kind of client slot on the Host.<br>
+<br>
+It&lsquo;s use is completely optional.<br>
+<br>
+The word &lsquo;init&lsquo; must be in lower case, and must NOT have any spaces after it.<br>
+<br>
+If a client sends an &lsquo;init&lsquo; request to the Host program, a 3 part comma delimited string is returned. The format of this returned string is:<br>
+</p><pre style='border-width:3px; border-style:solid; border-color:#0000FF; padding: 1em;'>
+clientID,bottomIndex,clientIPaddress
+</pre><p>
+<br>
+The <b>clientID</b> (string) is a string that can be used as the client&lsquo;s ID. Numbers start at 0, and are incremented each time an &lsquo;init&lsquo; request is made by any client. The client really only needs a client ID if it needs to receive a reply to a broadcast message. You could also uses the Python module uuid() to do this, but since the ID need only be unique in context of the Host, having a long 16 character string for an ID is a bit of an overkill.<br>
+<br>
+If a Client has no need of receiving any replies to it&lsquo;s messages, like an IoT temperature monitor, then the string &lsquo;noReply&lsquo; can be used in place of the Client&lsquo;s ID.<br>
+<br>
+The <b>bottomIndex</b> (string) is the Index of the last (bottom) message in the Message Queue. This is the value that can be used for your first &lsquo;recv&lsquo; request. However, the client could simply start with an Index of zero, in which case it may received messages that were broadcasts 10 minutes before it started. But if that&lsquo;s not an issue, starting at zero is OK.<br>
+<br>
+The <b>clientIPaddress</b> (string) is the IP address of the client as seen by the Host. It just easier to get this value from the Host program rather than trying to get it from a DNS server. This value should be included in the reply to any &lsquo;+ping&lsquo; requests. It can also be used as a channel for the &lsquo;send&lsquo; request; like broadcast a message to all clients on &lsquo;192.168.0.35&lsquo; for example.<br>
+<br>
+<br>
+</p><hr><p>
+</p><h2>A client written in C++ (example4.cpp):</h2><p>
+<br>
+If your a C++ programmer, I invite you to look at the file <b>example4.cpp</b> at this time.<br>
+<br>
+This C++ source code is a very simple example of a client, showing how messages are broadcast and received. It is basically the same as <b>example3.py</b>, except it&lsquo;s written in C++ instead of Python.<br>
+<br>
+Please feel free to copy/past this code as a starting point for creating your own clients.<br>
+<br>
+</p><hr><p>
+</p><h2>What about clients written in C, Java, Perl ?</h2><p>
+<br>
+You can write a TMQM client is any programming language. It need only be able to send and receive strings of text to/from the Host program.<br>
+<br>
+I would start by re-creating the query() function from pytmqm.py, &nbsp;&nbsp; into your target language.<br>
+<br>
+You will also need code to read the HostIP from the file created by setup.py ( TMQM-HostIP.txt ).<br>
+<br>
+Once you have a query() function up and working, then the door to the Host is open !<br>
+<br>
+<br>
+There exists on the Internet these things called <b>Code Converters</b>. You can feed to them a piece of Python code, and the results could be the exact same code written in Java, or Perl, or C#.<br>
+<br>
+These services are often FREE.<br>
+<br>
+To find a Code Converter that would meet your needs, do an Internet search for a term like &lsquo;<b>Converter Python Java</b>&lsquo;.<br>
+<br>
+Remember to bookmark the Converters you like.<br>
+<br>
+</p><hr><p>
+</p><h2>What about clients on low-power IoT devices ?</h2><p>
+<br>
+This subject is kind of &lsquo;out-of-scope&lsquo; for this document. But I felt that I had to at least mention it.<br>
+<br>
+The answer is...YES.<br>
+<br>
+A TMQM client can be made to work on a low-power IoT device like an Arduion, ESP32, or home-brewed circuit <u>without a WiFi connection</u> . The solution is to use low-power 433 Mhz communication devices to create a secondary &lsquo;network&lsquo; .<br>
+<br>
+You can use a low-power 433 Mhz transmitter, attached to the Tx pin of an ESP32, to transmit the output text to any nearby receiver.<br>
+<br>
+You will need to create a Client (called a Gateway ) that would receive the requests being broadcasts over 433 Mhz, and pass them by WiFi connection to the Host.<br>
+<br>
+If this is something that you might be interested in, I invite you to do an Internet search for the terms &lsquo;433 Mhz Arduino&lsquo;.<br>
+<br>
+I also invite you to share your experiences of this over the Internet. If we all share what we learn, it will make things easier for those who follow.<br>
+<br>
+</p><hr><p>
+</p><h2>A client without SOCKETS:</h2><p>
+</p><h2>A client written in BASIC:</h2><p>
+<br>
+Wait ? ... &nbsp;&nbsp; WHAT ? ... &nbsp;&nbsp; BASIC ???<br>
+<br>
+Why the heck would anyone want to write a client in BASIC ?<br>
+<br>
+This example is simply to make a point.<br>
+- And that point is:<br>
+- You can write a TMQM Client in <u>ANY PROGRAMMING LANGUAGE</u>. Even BASIC.<br>
+<br>
+In the example program <b>example1.py</b>, the connection to the Host program is made over a network Socket. But what if you are writing a client in a programming language that does not support sockets? Like Fortran, Cobol, or Basic?<br>
+<br>
+In this case, we could use a utility called <b>NETCAT</b>.<br>
+<br>
+Netcat is a networking utility program available for Linux, Windows and Mac. It is used primarily by network administrators for troubleshooting and firewall work. But it can also be used as a &lsquo;backdoor&lsquo; to communicate with the Host program.<br>
+<br>
+To install Netcat on your computer, simply do an Internet search for “<b>How to install Netcat</b>”, and follow the instructions.<br>
+<br>
+Here are a few examples of using Netcat to communicate with the Host program. You will need to replace my hostIP with the one for your host.<br>
+The port will always be 65432.<br>
+<br>
+</p><pre style='border-width:3px; border-style:solid; border-color:#0000FF; padding: 1em;'>
+echo "helo" | netcat 192.168.0.128 65432
+returns: Queue Manager Responding.
+
+echo "init" | netcat 192.168.0.128 65432
+returns: 13,126,192.168.0.128
+
+echo "send,public,13,This is a test message." | netcat 192.168.0.128 65432
+returns: OK
+
+echo "recv,126" | netcat 192.168.0.128 65432
+returns: 127,public,13,This is a test message.
+</pre><p>
+<br>
+<br>
+OK, So how can Netcat be used by a client?<br>
+<br>
+Consider the following bit of BASIC. This is using the yaBasic interpreter.<br>
+</p><pre style='border-width:3px; border-style:solid; border-color:#0000FF; padding: 1em;'>
+hostIP$ = "192.168.0.128"
+#
+print query$( "helo", hostIP$ )
+print query$( "init", hostIP$ )
+print query$( "send,public,13,This is a test message.", hostIP$ )
+print query$( "recv,13", hostIP$ )
+#
+#
+sub query$( m$, hostIP$ )
+k$ = "echo &lsquo;" + m$ + "&lsquo; | netcat " + hostIP$ + " 65432"
+return system$( k$ )
+end sub
+</pre><p>
+<br>
+The results are:<br>
+</p><pre style='border-width:3px; border-style:solid; border-color:#0000FF; padding: 1em;'>
+Queue Manager Responding.
+14,13,192.168.0.128
+OK
+14,public,13,This is a test message.
+</pre><p>
+<br>
+<br>
+</p><hr><p>
+</p><h2>Compiling Host from source code:</h2><p>
+<br>
+The source code for &lsquo;tmqm.cpp&lsquo; and &lsquo;tmqm.c&lsquo; are available from the gethub repository, or the zip file ( see &lsquo;download&lsquo; section above).<br>
+<br>
+The files are the same, only the file extensions are different.<br>
+<br>
+To compile the Host program from the source code, the command is:<br>
+- &nbsp;&nbsp; Linux: &nbsp;&nbsp;  g++ tmqm.cpp -o tmqm<br>
+- &nbsp;&nbsp; Windows: &nbsp;&nbsp;  gcc tmqm.c -o tmqm.exe<br>
+<br>
+This will create an executable that you can then run on your computer.<br>
+<br>
+</p><hr><p>
+</p><h2>Creative Commons License</h2><p>
+<br>
+The Tinny Message Queue Manager (TMQM), and all associated files and examples, are licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/). &nbsp;&nbsp; So <u>you are free to use these file and examples in your own projects</u> as long as you follow a few simple rules.<br>
+<br>
+See the accompanying file <b>license.md</b> for details.<br>
+<br>
+</p><hr><p>
+</p><h2>As always</h2><p>
+<br>
+The information presented here is <b>FREE</b>.<br>
+<br>
+But donations to help pay for Coffee, Beer, and Rent are always welcomed.<br>
+<br>
+So, if you would like to buy me a Coffee, please see the donations button at the bottom of my Bio page. &nbsp;&nbsp; <a href='http://www.gsw7.net/joe' target='_Blank'>http://www.gsw7.net/joe</a><br>
+<br>
+Thanks.<br>
+<br>
+<br>
+</p><hr><p>
+</p><h1>End of Documentation</h1><p>
+ </p> </body> </html>

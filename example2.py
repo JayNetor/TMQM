@@ -20,7 +20,7 @@ You are free to use this script as a starting point to create your own,
 as long as you follow a few simple rules. See license above for details. 
 
 For documentation see:
-https://www.gsw7.net/files/tmqm/readme.md   
+https://www.gsw7.net/files/tmqm/README.html 
 
 """
 
